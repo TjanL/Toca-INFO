@@ -8,7 +8,8 @@ on:
   
 env:
   AZURE_FUNCTIONAPP_NAME: toca
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: './azure' 
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './azure'
+  GIN_MODE: 'release'  
 
 jobs:
   build:
@@ -20,7 +21,7 @@ jobs:
     - uses: actions/setup-go@v3
       with:
         go-version: '>=1.17.0'
-    - run: go build -o './azure/handler'
+    - run: go build -o '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/handler'
     
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
